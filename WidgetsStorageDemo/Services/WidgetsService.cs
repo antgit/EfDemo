@@ -116,10 +116,57 @@ namespace WidgetsStorageDemo.Services
             return widget.Id;
         }
 
-        public async Task Update(WidgetVariation model)
+        public async Task Update(int id, WidgetVariation model)
         {
-            _widgetsContext.Update(model);
+            var widget = await _widgetsContext.WidgetVariations.FindAsync(id);
+
+            if (widget == null)
+            {
+                return;
+            }
+
+            model.Id = 0;
+
+            foreach (var item in model.Audiences)
+            {
+                item.Id = 0;
+            }
+
+            foreach (var state in model.States)
+            {
+                state.Id = 0;
+
+                foreach (var container in state.WidgetContainers)
+                {
+                    container.Id = 0;
+
+                    foreach (var component in container.WidgetComponents)
+                    {
+                        component.Id = 0;
+                    }
+                }
+            }
+
+            _widgetsContext.Remove(widget);
+            _widgetsContext.Add(model);
             await _widgetsContext.SaveChangesAsync();
+        }
+
+        public async Task<List<WidgetVariation>> GetAll()
+        {
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            var result = await _widgetsContext.WidgetVariations
+                .Include(x => x.Audiences)
+                .Include(x => x.States)
+                    .ThenInclude(x => x.WidgetContainers)
+                        .ThenInclude(x => x.WidgetComponents)
+                .ToListAsync();
+
+            stopWatch.Stop();
+
+            return result;
         }
 
         public async Task<WidgetVariation> Get(int id)

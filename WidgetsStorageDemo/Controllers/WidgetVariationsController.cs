@@ -5,12 +5,12 @@ using WidgetsStorageDemo.Services;
 
 namespace WidgetsStorageDemo.Controllers
 {
-    [Route("")]
-    public class HomeController: Controller
+    [Route("variations")]
+    public class WidgetVariationsController: Controller
     {
         private readonly WidgetsService _widgetsService;
 
-        public HomeController(WidgetsService widgetsService)
+        public WidgetVariationsController(WidgetsService widgetsService)
         {
             _widgetsService = widgetsService;
         }
@@ -33,12 +33,19 @@ namespace WidgetsStorageDemo.Controllers
             }
 
             return Ok(widget);
-        }        
+        }
+
+        [HttpGet()]
+        public async Task<IActionResult> Read()
+        {
+            var widget = await _widgetsService.GetAll();
+            return Ok(widget);
+        }
 
         [HttpPut("{id:int}")]
         public async Task<IActionResult> Update([FromRoute]int id, [FromBody]WidgetVariation model)
         {
-            await _widgetsService.Update(model);
+            await _widgetsService.Update(id, model);
             return NoContent();
         }
 
