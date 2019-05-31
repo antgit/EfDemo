@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using WidgetsStorageDemo.Models;
 
@@ -16,7 +15,7 @@ namespace WidgetsStorageDemo.Services
             _widgetsContext = widgetsContext;
         }
 
-        public async Task<int> CreateWidget()
+        public async Task<int> Create()
         {
             var widget = new WidgetVariation
             {
@@ -117,7 +116,13 @@ namespace WidgetsStorageDemo.Services
             return widget.Id;
         }
 
-        public async Task<WidgetVariation> GetWidget(int id)
+        public async Task Update(WidgetVariation model)
+        {
+            _widgetsContext.Update(model);
+            await _widgetsContext.SaveChangesAsync();
+        }
+
+        public async Task<WidgetVariation> Get(int id)
         {
             var stopWatch = new Stopwatch();
             stopWatch.Start();

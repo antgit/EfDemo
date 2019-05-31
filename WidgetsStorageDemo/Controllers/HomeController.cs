@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
+using WidgetsStorageDemo.Models;
 using WidgetsStorageDemo.Services;
 
 namespace WidgetsStorageDemo.Controllers
@@ -14,25 +15,38 @@ namespace WidgetsStorageDemo.Controllers
             _widgetsService = widgetsService;
         }
 
-        [HttpGet("{id:int}")]
-        public async Task<IActionResult> Get(int id)
-        {
-            var widget = await _widgetsService.GetWidget(id);
-            return Ok(widget);
-        }
-
         [HttpPost]
-        public async Task<IActionResult> Post()
+        public async Task<IActionResult> Create()
         {
-            var id = await _widgetsService.CreateWidget();
+            var id = await _widgetsService.Create();
             return Ok(id);
         }
 
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> Read([FromRoute]int id)
+        {
+            var widget = await _widgetsService.Get(id);
+
+            if(widget == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(widget);
+        }        
+
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> Update([FromRoute]int id, [FromBody]WidgetVariation model)
+        {
+            await _widgetsService.Update(model);
+            return NoContent();
+        }
+
         [HttpDelete("{id:int}")]
-        public async Task<IActionResult> Delete(int id)
+        public async Task<IActionResult> Delete([FromRoute]int id)
         {
             await _widgetsService.Delete(id);
-            return Ok();
+            return NoContent();
         }
     }
 }

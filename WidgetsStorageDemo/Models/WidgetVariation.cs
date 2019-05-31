@@ -10,8 +10,8 @@ namespace WidgetsStorageDemo.Models
 
         public string Name { get; set; }
 
-        public ICollection<WidgetState> States { get; set; }
+        public List<WidgetState> States { get; set; }
 
-        public ICollection<WidgetAudience> Audiences { get; set; }
+        public List<WidgetAudience> Audiences { get; set; }
     }
 }
