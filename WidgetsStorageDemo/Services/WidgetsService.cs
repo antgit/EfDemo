@@ -123,9 +123,10 @@ namespace WidgetsStorageDemo.Services
             stopWatch.Start();
 
             var result =  await _widgetsContext.WidgetVariations
+                .Include(x => x.Audiences)
                 .Include(x => x.States)
-                .ThenInclude(x => x.WidgetContainers)
-                .ThenInclude(x => x.WidgetComponents)
+                    .ThenInclude(x => x.WidgetContainers)
+                        .ThenInclude(x => x.WidgetComponents)
                 .FirstOrDefaultAsync(x => x.Id == id);
 
             stopWatch.Stop();

@@ -11,6 +11,7 @@ namespace WidgetsStorageDemo
         }
 
         public DbSet<WidgetVariation> WidgetVariations { get; set; }
+        public DbSet<WidgetAudience> WidgetAudiences { get; set; }
         public DbSet<WidgetState> WidgetStates { get; set; }
         public DbSet<WidgetContainer> WidgetContainers { get; set; }
         public DbSet<WidgetComponent> WidgetComponents { get; set; }
