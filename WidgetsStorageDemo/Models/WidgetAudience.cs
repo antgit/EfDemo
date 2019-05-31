@@ -1,17 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace WidgetsStorageDemo.Models
 {
-    public class WidgetVariation
+    public class WidgetAudience
     {
         public int Id { get; set; }
 
         public string Name { get; set; }
-
-        public ICollection<WidgetState> States { get; set; }
-
-        public ICollection<WidgetAudience> Audiences { get; set; }
     }
 }
