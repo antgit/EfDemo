@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using WidgetsStorageDemo.Models;
@@ -24,17 +25,78 @@ namespace WidgetsStorageDemo.Services
                 {
                     new WidgetState
                     {
+                        Name = "Widget state 1",
                         WidgetContainers = new List<WidgetContainer>
                         {
                             new WidgetContainer
                             {
+                                Name = "Widget container 1.1",
                                 WidgetComponents = new List<WidgetComponent>
                                 {
-                                    new WidgetComponent()
+                                    new WidgetComponent
+                                    {
+                                        Name = "Widget component 1.1.1",
+                                    },
+                                    new WidgetComponent
+                                    {
+                                        Name = "Widget component 1.1.2",
+                                    }
+                                }
+                            },
+                            new WidgetContainer
+                            {
+                                Name = "Widget container 1.2",
+                                WidgetComponents = new List<WidgetComponent>
+                                {
+                                    new WidgetComponent
+                                    {
+                                        Name = "Widget component 1.2.1",
+                                    },
+                                    new WidgetComponent
+                                    {
+                                        Name = "Widget component 1.2.2",
+                                    }
                                 }
                             }
                         }
-                    }
+                    },
+                    new WidgetState
+                    {
+                        Name = "Widget state 2",
+                        WidgetContainers = new List<WidgetContainer>
+                        {
+                            new WidgetContainer
+                            {
+                                Name = "Widget container 2.1",
+                                WidgetComponents = new List<WidgetComponent>
+                                {
+                                    new WidgetComponent
+                                    {
+                                        Name = "Widget component 2.1.1",
+                                    },
+                                    new WidgetComponent
+                                    {
+                                        Name = "Widget component 2.1.2",
+                                    }
+                                }
+                            },
+                            new WidgetContainer
+                            {
+                                Name = "Widget container 1.2",
+                                WidgetComponents = new List<WidgetComponent>
+                                {
+                                    new WidgetComponent
+                                    {
+                                        Name = "Widget component 2.2.1",
+                                    },
+                                    new WidgetComponent
+                                    {
+                                        Name = "Widget component 2.2.2",
+                                    }
+                                }
+                            }
+                        }
+                    },
                 }
             };
 
@@ -45,11 +107,18 @@ namespace WidgetsStorageDemo.Services
 
         public async Task<WidgetVariation> GetWidget(int id)
         {
-            return await _widgetsContext.WidgetVariations
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
+
+            var result =  await _widgetsContext.WidgetVariations
                 .Include(x => x.States)
                 .ThenInclude(x => x.WidgetContainers)
                 .ThenInclude(x => x.WidgetComponents)
                 .FirstOrDefaultAsync(x => x.Id == id);
+
+            stopWatch.Stop();
+
+            return result;
         }
     }
 }

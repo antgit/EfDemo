@@ -17,13 +17,14 @@ namespace WidgetsStorageDemo.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            var widget = await _widgetsService.GetWidget(2);
+            var widget = await _widgetsService.GetWidget(3);
             return Ok();
         }
 
         [HttpPost]
         public async Task<IActionResult> Post()
         {
+            await _widgetsService.CreateWidget();
             return Ok();
         }
     }
