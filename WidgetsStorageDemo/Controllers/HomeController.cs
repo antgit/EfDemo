@@ -1,34 +1,28 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using WidgetsStorageDemo.Models;
+using System.Threading.Tasks;
+using WidgetsStorageDemo.Services;
 
 namespace WidgetsStorageDemo.Controllers
 {
     [Route("")]
     public class HomeController: Controller
     {
-        private readonly WidgetsContext _widgetsContext;
+        private readonly WidgetsService _widgetsService;
 
-        public HomeController(WidgetsContext widgetsContext)
+        public HomeController(WidgetsService widgetsService)
         {
-            _widgetsContext = widgetsContext;
+            _widgetsService = widgetsService;
         }
 
         [HttpGet]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            var widget = new WidgetVariation
-            {
-                Name = "Demo widget"
-            };
-
-            _widgetsContext.WidgetVariations.Add(widget);
-            _widgetsContext.SaveChanges();
-
+            var widget = await _widgetsService.GetWidget(2);
             return Ok();
         }
 
         [HttpPost]
-        public IActionResult Post()
+        public async Task<IActionResult> Post()
         {
             return Ok();
         }
