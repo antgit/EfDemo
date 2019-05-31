@@ -18,7 +18,8 @@ namespace WidgetsStorageDemo
             services.AddDbContext<WidgetsContext>
                 (options => options.UseSqlServer(connection));
 
-            services.AddSingleton<WidgetsService>();
+            services.AddTransient<WidgetsService>();
+            services.AddTransient<UnitOfWorkService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
