@@ -1,11 +1,12 @@
-﻿using System.Data.Entity;
+﻿using Microsoft.EntityFrameworkCore;
 using WidgetsStorageDemo.Models;
 
 namespace WidgetsStorageDemo
 {
     public class WidgetsContext : DbContext
     {
-        public WidgetsContext() : base("WidgetsContext")
+        public WidgetsContext(DbContextOptions<WidgetsContext> options)
+            : base(options)
         {
         }
 
