@@ -123,7 +123,7 @@ namespace WidgetsStorageDemo.Services
             if (widget == null)
             {
                 return;
-            }
+        }
 
             model.Id = 0;
 
@@ -196,7 +196,6 @@ namespace WidgetsStorageDemo.Services
             }
 
             _widgetsContext.Remove(widget);
-            await _widgetsContext.SaveChangesAsync();
         }
     }
 }
