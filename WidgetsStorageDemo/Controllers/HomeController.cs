@@ -18,7 +18,7 @@ namespace WidgetsStorageDemo.Controllers
         public async Task<IActionResult> Get(int id)
         {
             var widget = await _widgetsService.GetWidget(id);
-            return Ok();
+            return Ok(widget);
         }
 
         [HttpPost]
@@ -26,6 +26,13 @@ namespace WidgetsStorageDemo.Controllers
         {
             var id = await _widgetsService.CreateWidget();
             return Ok(id);
+        }
+
+        [HttpDelete("{id:int}")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            await _widgetsService.Delete(id);
+            return Ok();
         }
     }
 }

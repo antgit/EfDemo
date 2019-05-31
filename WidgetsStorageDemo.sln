@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.645
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WidgetsStorageDemo", "WidgetsStorageDemo\WidgetsStorageDemo.csproj", "{24A58690-BD9A-4E87-871E-BEC6FAB15315}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WidgetsStorageDemo", "WidgetsStorageDemo\WidgetsStorageDemo.csproj", "{24A58690-BD9A-4E87-871E-BEC6FAB15315}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WidgetsStorageDemo.Tests", "WidgetsStorageDemo.Tests\WidgetsStorageDemo.Tests.csproj", "{D5A2F66E-F78A-48D4-9883-FB7B7471D60D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{24A58690-BD9A-4E87-871E-BEC6FAB15315}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{24A58690-BD9A-4E87-871E-BEC6FAB15315}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{24A58690-BD9A-4E87-871E-BEC6FAB15315}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5A2F66E-F78A-48D4-9883-FB7B7471D60D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5A2F66E-F78A-48D4-9883-FB7B7471D60D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5A2F66E-F78A-48D4-9883-FB7B7471D60D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5A2F66E-F78A-48D4-9883-FB7B7471D60D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

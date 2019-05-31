@@ -132,5 +132,18 @@ namespace WidgetsStorageDemo.Services
 
             return result;
         }
+
+        public async Task Delete(int id)
+        {
+            var widget = await _widgetsContext.WidgetVariations.FindAsync(id);
+
+            if(widget == null)
+            {
+                return;
+            }
+
+            _widgetsContext.Remove(widget);
+            await _widgetsContext.SaveChangesAsync();
+        }
     }
 }
