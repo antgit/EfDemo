@@ -9,19 +9,19 @@ namespace WidgetsStorageDemo.Controllers
     public class WidgetVariationsController: Controller
     {
         private readonly WidgetsService _widgetsService;
-        private readonly UnitOfWorkService _unitOfWorkService;
+        private readonly UnitOfWork _unitOfWork;
 
-        public WidgetVariationsController(WidgetsService widgetsService, UnitOfWorkService unitOfWorkService)
+        public WidgetVariationsController(WidgetsService widgetsService, UnitOfWork unitOfWorkService)
         {
             _widgetsService = widgetsService;
-            _unitOfWorkService = unitOfWorkService;
+            _unitOfWork = unitOfWorkService;
         }
 
         [HttpPost]
         public async Task<IActionResult> Create()
         {
             var id = await _widgetsService.Create();
-            await _unitOfWorkService.SaveChanges();
+            await _unitOfWork.Save();
             return Ok(id);
         }
 
@@ -49,7 +49,7 @@ namespace WidgetsStorageDemo.Controllers
         public async Task<IActionResult> Update([FromRoute]int id, [FromBody]WidgetVariation model)
         {
             await _widgetsService.Update(id, model);
-            await _unitOfWorkService.SaveChanges();
+            await _unitOfWork.Save();
             return NoContent();
         }
 
@@ -57,7 +57,7 @@ namespace WidgetsStorageDemo.Controllers
         public async Task<IActionResult> Delete([FromRoute]int id)
         {
             await _widgetsService.Delete(id);
-            await _unitOfWorkService.SaveChanges();
+            await _unitOfWork.Save();
             return NoContent();
         }
     }

@@ -2,16 +2,16 @@
 
 namespace WidgetsStorageDemo.Services
 {
-    public class UnitOfWorkService
+    public class UnitOfWork
     {
         private readonly WidgetsContext _widgetsContext;
 
-        public UnitOfWorkService(WidgetsContext widgetsContext)
+        public UnitOfWork(WidgetsContext widgetsContext)
         {
             _widgetsContext = widgetsContext;
         }
 
-        public Task SaveChanges()
+        public Task Save()
         {
             return _widgetsContext.SaveChangesAsync();
         }
