@@ -16,7 +16,7 @@ namespace WidgetsStorageDemo.Services
             _widgetsContext = widgetsContext;
         }
 
-        public async Task CreateWidget()
+        public async Task<int> CreateWidget()
         {
             var widget = new WidgetVariation
             {
@@ -97,12 +97,24 @@ namespace WidgetsStorageDemo.Services
                             }
                         }
                     },
+                },
+                Audiences = new List<WidgetAudience>
+                {
+                    new WidgetAudience
+                    {
+                        Name = "Widget audience 1"
+                    },
+                    new WidgetAudience
+                    {
+                        Name = "Widget audience 2"
+                    }
                 }
             };
 
             await _widgetsContext.WidgetVariations.AddAsync(widget);
             await _widgetsContext.SaveChangesAsync();
 
+            return widget.Id;
         }
 
         public async Task<WidgetVariation> GetWidget(int id)

@@ -14,18 +14,18 @@ namespace WidgetsStorageDemo.Controllers
             _widgetsService = widgetsService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Get()
+        [HttpGet("{id:int}")]
+        public async Task<IActionResult> Get(int id)
         {
-            var widget = await _widgetsService.GetWidget(3);
+            var widget = await _widgetsService.GetWidget(id);
             return Ok();
         }
 
         [HttpPost]
         public async Task<IActionResult> Post()
         {
-            await _widgetsService.CreateWidget();
-            return Ok();
+            var id = await _widgetsService.CreateWidget();
+            return Ok(id);
         }
     }
 }
