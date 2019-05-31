@@ -26,16 +26,7 @@ namespace WidgetsStorageDemo.Tests
             var widget = await _testFixture.GetResponseModelTyped<WidgetVariation>(getResponse);
 
             var deleteResponse = await _testFixture.HttpClient.DeleteAsync($"{widgetId}");
-        }
-
-        [Test]
-        public async Task DeleteTest()
-        {
-            for (var i = 1; i < 10; i++)
-            {
-                var deleteResponse = await _testFixture.HttpClient.DeleteAsync($"{i}");
-                deleteResponse.EnsureSuccessStatusCode();
-            }
+            deleteResponse.EnsureSuccessStatusCode();
         }
     }
 }
